@@ -6,12 +6,13 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: Time@12345
+      MYSQL_ROOT_PASSWORD: PRG@1qaz
       MYSQL_ROOT_HOST: '%'
       MYSQL_DATABASE: "bhw"
     volumes:
       - db-data:/var/lib/mysql
     restart: unless-stopped
+
   phpmyadmin:
     container_name: bhw_pma
     image: phpmyadmin:latest
@@ -20,6 +21,7 @@ services:
     environment:
       PMA_HOST: backend
     restart: unless-stopped
+
   frontend:
     container_name: bhw-app
     image: php-app:latest
@@ -28,8 +30,7 @@ services:
     build:
       context: .
       dockerfile: "Dockerfile"
-    depends_on: 
+    depends_on:
       - backend
 volumes:
   db-data:
-
